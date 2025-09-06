@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 10 Science: EM Waves Quiz</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .protection-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0, 0, 0, 0.02) 10px,
+                rgba(0, 0, 0, 0.02) 20px
+            );
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        .privacy-consent {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .privacy-consent h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .privacy-consent p {
+            margin-bottom: 15px;
+        }
+        .consent-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        .consent-checkbox input {
+            margin-right: 10px;
+            margin-top: 3px;
+        }
+        .student-info {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 4px solid #3498db;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+            background-color: #fff;
+        }
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+        .timer {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #e74c3c;
+            font-weight: bold;
+            background-color: #fff4f4;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            background-color: #f8f9fa;
+            border-radius: 0 8px 8px 0;
+        }
+        .question-number {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+        }
+        .options label {
+            display: block;
+            padding: 12px 15px;
+            margin: 10px 0;
+            background-color: #ecf0f1;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        .options label:hover {
+            background-color: #d6dbdf;
+            transform: translateY(-2px);
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        button:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        #results {
+            display: none;
+            margin-top: 30px;
+        }
+        .score {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+        }
+        .student-details {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #3498db;
+        }
+        .student-details p {
+            margin: 8px 0;
+            font-size: 1.1em;
+        }
+        .student-details .detail-label {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        .review-item {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .correct {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        .explanation {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .section-title {
+            font-size: 1.2em;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #eee;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 0.9em;
+            margin-top: 5px;
+            display: none;
+        }
+        .no-capture {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        .question-text {
+            position: relative;
+        }
+        .question-text::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        @media (max-width: 768px) {
+            .protection-overlay {
+                background: repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 5px,
+                    rgba(0, 0, 0, 0.03) 5px,
+                    rgba(0, 0, 0, 0.03) 10px
+                );
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="protection-overlay"></div>
+    <div class="container">
+        <h1>Grade 10 Science: Electromagnetic Waves Quiz</h1>
+        
+        <div id="privacy-consent">
+            <div class="section-title">Data Privacy Consent</div>
+            <div class="privacy-consent">
+                <h2>Data Privacy Notice</h2>
+                <p>By submitting this form, I agree that my personal data will be collected and used only for academic/administrative purposes, in compliance with the Data Privacy Act of 2012.</p>
+                
+                <div class="consent-checkbox">
+                    <input type="checkbox" id="privacy-consent-checkbox">
+                    <label for="privacy-consent-checkbox">I agree</label>
+                </div>
+                <div id="consent-error" class="error-message">You must provide consent to proceed with the quiz.</div>
+            </div>
+            
+            <div class="section-title">Student Information</div>
+            <div class="student-info">
+                <div class="form-group">
+                    <label for="student-name">Full Name:</label>
+                    <input type="text" id="student-name" placeholder="Enter your full name" required>
+                    <div id="name-error" class="error-message">Please enter your full name.</div>
+                </div>
+                <div class="form-group">
+                    <label for="student-section">Section:</label>
+                    <input type="text" id="student-section" placeholder="Enter your section" required>
+                    <div id="section-error" class="error-message">Please enter your section.</div>
+                </div>
+                <button id="start-btn">Start Quiz</button>
+            </div>
+        </div>
+        
+        <div id="quiz-container" style="display: none;">
+            <div class="timer">Time remaining: <span id="time">07:00</span></div>
+            
+            <div id="question-container">
+                <!-- Questions will be loaded here -->
+            </div>
+            
+            <div class="navigation">
+                <button id="prev-btn" style="width: 48%; display: inline-block;">Previous</button>
+                <button id="next-btn" style="width: 48%; display: inline-block; float: right;">Next</button>
+            </div>
+            
+            <button id="submit-btn">Submit Quiz</button>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Submitting your answers...</p>
+        </div>
+        
+        <div class="success-message" id="success-message">
+            <h3>✓ Answers successfully submitted!</h3>
+            <p>Your quiz has been recorded. You can now close this window.</p>
+        </div>
+        
+        <div id="results">
+            <div class="score">Your score: <span id="score-value">0</span>/10</div>
+            
+            <div class="student-details">
+                <p><span class="detail-label">Student Name:</span> <span id="result-student-name"></span></p>
+                <p><span class="detail-label">Section:</span> <span id="result-student-section"></span></p>
+                <p><span class="detail-label">Test Started:</span> <span id="test-start-time"></span></p>
+                <p><span class="detail-label">Test Finished:</span> <span id="test-end-time"></span></p>
+                <p><span class="detail-label">Time Taken:</span> <span id="time-taken"></span></p>
+            </div>
+            
+            <div id="review-container">
+                <!-- Review content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Quiz questions data - 20 questions (10 will be randomly selected)
+        const allQuizData = [
+            {
+                question: "Which of the following lists the electromagnetic waves in order of increasing frequency?",
+                options: [
+                    "Radio, Microwave, Infrared, Visible",
+                    "Visible, Ultraviolet, X-ray, Gamma",
+                    "Gamma, X-ray, Ultraviolet, Visible",
+                    "Microwave, Radio, Infrared, Visible"
+                ],
+                answer: 0,
+                explanation: "Radio waves have the lowest frequency, followed by microwaves, then infrared, then visible light."
+            },
+            {
+                question: "What is the main source of electromagnetic waves?",
+                options: [
+                    "Vibrating atoms",
+                    "Oscillating electric charges",
+                    "Moving water molecules",
+                    "Sound vibrations"
+                ],
+                answer: 1,
+                explanation: "Electromagnetic waves are produced by oscillating or accelerating electric charges."
+            },
+            {
+                question: "Which property is the same for all electromagnetic waves in a vacuum?",
+                options: [
+                    "Wavelength",
+                    "Frequency",
+                    "Speed",
+                    "Energy"
+                ],
+                answer: 2,
+                explanation: "All electromagnetic waves travel at the speed of light (3 × 10⁸ m/s) in a vacuum."
+            },
+            {
+                question: "Which electromagnetic wave has the longest wavelength?",
+                options: [
+                    "X-rays",
+                    "Radio waves",
+                    "Gamma rays",
+                    "Ultraviolet"
+                ],
+                answer: 1,
+                explanation: "Radio waves have the longest wavelengths in the electromagnetic spectrum."
+            },
+            {
+                question: "Which type of EM wave is used in medical imaging to view bones?",
+                options: [
+                    "Infrared",
+                    "Ultraviolet",
+                    "X-rays",
+                    "Microwaves"
+                ],
+                answer: 2,
+                explanation: "X-rays can penetrate soft tissues but are absorbed by bones, making them useful for medical imaging."
+            },
+            {
+                question: "Which EM wave is responsible for the feeling of heat from the sun?",
+                options: [
+                    "Visible light",
+                    "Ultraviolet",
+                    "Infrared",
+                    "Radio waves"
+                ],
+                answer: 2,
+                explanation: "Infrared radiation is felt as heat from the sun."
+            },
+            {
+                question: "Which of the following can electromagnetic waves NOT do?",
+                options: [
+                    "Travel through a vacuum",
+                    "Transfer energy",
+                    "Travel faster than light",
+                    "Be reflected"
+                ],
+                answer: 2,
+                explanation: "According to physics, nothing can travel faster than light in a vacuum."
+            },
+            {
+                question: "Which color of visible light has the shortest wavelength?",
+                options: [
+                    "Red",
+                    "Green",
+                    "Blue",
+                    "Yellow"
+                ],
+                answer: 2,
+                explanation: "Violet and blue light have the shortest wavelengths in the visible spectrum."
+            },
+            {
+                question: "Which EM waves are used in remote controls for TVs?",
+                options: [
+                    "Radio waves",
+                    "Microwaves",
+                    "Infrared",
+                    "Ultraviolet"
+                ],
+                answer: 2,
+                explanation: "Remote controls typically use infrared signals."
+            },
+            {
+                question: "What protects us from the sun's harmful ultraviolet radiation?",
+                options: [
+                    "The atmosphere",
+                    "Earth's magnetic field",
+                    "Clouds",
+                    "The ozone layer"
+                ],
+                answer: 3,
+                explanation: "The ozone layer in the stratosphere absorbs most of the sun's harmful ultraviolet radiation."
+            },
+            // Additional questions for randomization
+            {
+                question: "Which electromagnetic wave has the highest energy?",
+                options: [
+                    "Radio waves",
+                    "Visible light",
+                    "X-rays",
+                    "Gamma rays"
+                ],
+                answer: 3,
+                explanation: "Gamma rays have the highest energy in the electromagnetic spectrum."
+            },
+            {
+                question: "What is the speed of light in a vacuum?",
+                options: [
+                    "3 × 10⁶ m/s",
+                    "3 × 10⁸ m/s",
+                    "3 × 10¹⁰ m/s",
+                    "3 × 10¹² m/s"
+                ],
+                answer: 1,
+                explanation: "The speed of light in a vacuum is exactly 299,792,458 m/s, which is approximately 3 × 10⁸ m/s."
+            },
+            {
+                question: "Which of these is NOT an electromagnetic wave?",
+                options: [
+                    "Sound wave",
+                    "Radio wave",
+                    "Microwave",
+                    "X-ray"
+                ],
+                answer: 0,
+                explanation: "Sound waves are mechanical waves that require a medium to travel, unlike electromagnetic waves."
+            },
+            {
+                question: "Which EM wave is used in night vision technology?",
+                options: [
+                    "Infrared",
+                    "Ultraviolet",
+                    "X-rays",
+                    "Gamma rays"
+                ],
+                answer: 0,
+                explanation: "Night vision devices detect infrared radiation emitted by objects."
+            },
+            {
+                question: "Which EM wave is used in mobile phone communication?",
+                options: [
+                    "Radio waves",
+                    "Microwaves",
+                    "Infrared",
+                    "Visible light"
+                ],
+                answer: 1,
+                explanation: "Mobile phones use microwaves for communication."
+            },
+            {
+                question: "Which of the following has the shortest wavelength?",
+                options: [
+                    "FM radio",
+                    "Microwave",
+                    "Green light",
+                    "Ultraviolet"
+                ],
+                answer: 3,
+                explanation: "Ultraviolet light has shorter wavelengths than visible light, microwaves, and radio waves."
+            },
+            {
+                question: "Which EM wave is used to kill bacteria in water purifiers?",
+                options: [
+                    "Ultraviolet",
+                    "Infrared",
+                    "X-rays",
+                    "Gamma rays"
+                ],
+                answer: 0,
+                explanation: "UV radiation is effective at killing bacteria and is used in water purification systems."
+            },
+            {
+                question: "Which color of light has the longest wavelength?",
+                options: [
+                    "Red",
+                    "Green",
+                    "Blue",
+                    "Violet"
+                ],
+                answer: 0,
+                explanation: "Red light has the longest wavelength in the visible spectrum."
+            },
+            {
+                question: "Which device is used to detect electromagnetic waves?",
+                options: [
+                    "Antenna",
+                    "Microphone",
+                    "Thermometer",
+                    "Barometer"
+                ],
+                answer: 0,
+                explanation: "Antennas are designed to detect and transmit electromagnetic waves."
+            },
+            {
+                question: "Which EM wave is used in radar systems?",
+                options: [
+                    "Radio waves",
+                    "Microwaves",
+                    "Infrared",
+                    "X-rays"
+                ],
+                answer: 1,
+                explanation: "Radar systems use microwaves to detect objects and measure their distance and speed."
+            }
+        ];
+
+        // Variables to track quiz state
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let timeLeft = 7 * 60; // 7 minutes in seconds
+        let timerInterval;
+        let studentName = "";
+        let studentSection = "";
+        let quizData = [];
+        let testStartTime = null;
+        let testEndTime = null;
+
+        // Function to select 10 random questions
+        function selectRandomQuestions() {
+            // Create a copy of all questions
+            const allQuestions = [...allQuizData];
+            const selectedQuestions = [];
+            
+            // Randomly select 10 questions
+            for (let i = 0; i < 10; i++) {
+                const randomIndex = Math.floor(Math.random() * allQuestions.length);
+                selectedQuestions.push(allQuestions[randomIndex]);
+                allQuestions.splice(randomIndex, 1);
+            }
+            
+            return selectedQuestions;
+        }
+
+        // Function to start the timer
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                
+                document.getElementById('time').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        // Function to load a question
+        function loadQuestion() {
+            const questionContainer = document.getElementById('question-container');
+            questionContainer.innerHTML = '';
+            
+            const questionElem = document.createElement('div');
+            questionElem.className = 'question';
+            questionElem.innerHTML = `
+                <div class="question-number">Question ${currentQuestion + 1} of ${quizData.length}</div>
+                <div class="question-text">${quizData[currentQuestion].question}</div>
+            `;
+            
+            const optionsElem = document.createElement('div');
+            optionsElem.className = 'options';
+            
+            // Shuffle options for each question
+            const options = [...quizData[currentQuestion].options];
+            const correctAnswer = options[quizData[currentQuestion].answer];
+            
+            // Fisher-Yates shuffle algorithm
+            for (let i = options.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [options[i], options[j]] = [options[j], options[i]];
+            }
+            
+            // Find the new index of the correct answer
+            const newAnswerIndex = options.indexOf(correctAnswer);
+            
+            options.forEach((option, index) => {
+                const label = document.createElement('label');
+                label.innerHTML = `
+                    <input type="radio" name="answer" value="${index}" 
+                        ${userAnswers[currentQuestion] === index ? 'checked' : ''}>
+                    <span class="no-capture">${option}</span>
+                `;
+                label.addEventListener('click', () => {
+                    userAnswers[currentQuestion] = index;
+                    // Store the actual answer index, not the shuffled one
+                    quizData[currentQuestion].userAnswer = newAnswerIndex === index;
+                    document.querySelectorAll('input[name="answer"]').forEach(radio => {
+                        radio.checked = radio.value === index.toString();
+                    });
+                });
+                optionsElem.appendChild(label);
+            });
+            
+            // Update the answer index for this question
+            quizData[currentQuestion].shuffledAnswer = newAnswerIndex;
+            
+            questionContainer.appendChild(questionElem);
+            questionContainer.appendChild(optionsElem);
+            
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            document.getElementById('next-btn').disabled = currentQuestion === quizData.length - 1;
+        }
+
+        // Function to submit the quiz to Google Sheets
+        async function submitToGoogleSheets() {
+            const loadingElement = document.getElementById('loading');
+            const successElement = document.getElementById('success-message');
+            const quizContainer = document.getElementById('quiz-container');
+            
+            // Show loading animation
+            quizContainer.style.display = 'none';
+            loadingElement.style.display = 'block';
+            
+            try {
+                // Prepare data for submission
+                const formData = new FormData();
+                formData.append('studentName', studentName);
+                formData.append('studentSection', studentSection);
+                formData.append('timestamp', new Date().toISOString());
+                formData.append('score', calculateScore());
+                formData.append('timeSpent', (7 * 60 - timeLeft) + ' seconds');
+                formData.append('startTime', testStartTime.toISOString());
+                formData.append('endTime', testEndTime.toISOString());
+                
+                // Add answers
+                quizData.forEach((question, index) => {
+                    const userAnswerIndex = userAnswers[index];
+                    const userAnswer = userAnswerIndex !== null ? question.options[userAnswerIndex] : 'Not answered';
+                    formData.append(`q${index + 1}`, userAnswer);
+                    formData.append(`q${index + 1}_correct`, question.options[question.answer]);
+                });
+                
+                // Replace this URL with your Google Apps Script Web App URL
+                const googleScriptUrl = 'https://script.google.com/macros/s/AKfycbyn7cb5qHukcNBniL8nrNpvLEIwC1Nme6smHNqkW9bI8MRgP_qmgRLW4o-Lehebh3aq/exec';
+                
+                // Send data to Google Apps Script
+                const response = await fetch(googleScriptUrl, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                // Show success message
+                loadingElement.style.display = 'none';
+                successElement.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error:', error);
+                loadingElement.innerHTML = `
+                    <p style="color: #dc3545;">Error submitting quiz. Please try again.</p>
+                    <button onclick="location.reload()">Retry</button>
+                `;
+            }
+        }
+
+        // Function to calculate score
+        function calculateScore() {
+            let score = 0;
+            quizData.forEach((question, index) => {
+                if (userAnswers[index] !== null && question.shuffledAnswer === userAnswers[index]) {
+                    score++;
+                }
+            });
+            return score;
+        }
+
+        // Function to format time for display
+        function formatTime(date) {
+            return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + 
+                   ' on ' + date.toLocaleDateString();
+        }
+
+        // Function to calculate time taken
+        function calculateTimeTaken(start, end) {
+            const diffMs = end - start; // milliseconds between start and end
+            const diffMins = Math.floor(diffMs / 60000); // minutes
+            const diffSecs = Math.floor((diffMs % 60000) / 1000); // seconds
+            
+            return `${diffMins} minutes ${diffSecs} seconds`;
+        }
+
+        // Function to show results
+        function showResults() {
+            const score = calculateScore();
+            
+            // Display score
+            document.getElementById('score-value').textContent = score;
+            
+            // Display student details and timing
+            document.getElementById('result-student-name').textContent = studentName;
+            document.getElementById('result-student-section').textContent = studentSection;
+            document.getElementById('test-start-time').textContent = formatTime(testStartTime);
+            document.getElementById('test-end-time').textContent = formatTime(testEndTime);
+            document.getElementById('time-taken').textContent = calculateTimeTaken(testStartTime, testEndTime);
+            
+            // Display review
+            const reviewContainer = document.getElementById('review-container');
+            reviewContainer.innerHTML = '<div class="section-title">Review your answers:</div>';
+            
+            quizData.forEach((question, index) => {
+                const userAnswerIndex = userAnswers[index];
+                const isCorrect = userAnswerIndex !== null && question.shuffledAnswer === userAnswerIndex;
+                const reviewItem = document.createElement('div');
+                reviewItem.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                
+                const userAnswer = userAnswerIndex !== null ? question.options[userAnswerIndex] : 'Not answered';
+                const correctAnswer = question.options[question.answer];
+                
+                reviewItem.innerHTML = `
+                    <p><strong>Question ${index + 1}:</strong> <span class="no-capture">${question.question}</span></p>
+                    <p>Your answer: <span class="no-capture">${userAnswer}</span></p>
+                    <p>Correct answer: <span class="no-capture">${correctAnswer}</span></p>
+                    <p class="explanation"><strong>Explanation:</strong> <span class="no-capture">${question.explanation}</span></p>
+                `;
+                
+                reviewContainer.appendChild(reviewItem);
+            });
+            
+            // Show results
+            document.getElementById('results').style.display = 'block';
+        }
+
+        // Function to submit the quiz
+        function submitQuiz() {
+            testEndTime = new Date();
+            clearInterval(timerInterval);
+            showResults();
+            submitToGoogleSheets();
+        }
+
+        // Initialize the quiz
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add event listeners to prevent right-click and text selection
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            document.addEventListener('selectstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            document.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            
+            // Start button event listener
+            document.getElementById('start-btn').addEventListener('click', () => {
+                // Check if consent is given
+                const consentGiven = document.getElementById('privacy-consent-checkbox').checked;
+                if (!consentGiven) {
+                    document.getElementById('consent-error').style.display = 'block';
+                    return;
+                } else {
+                    document.getElementById('consent-error').style.display = 'none';
+                }
+                
+                studentName = document.getElementById('student-name').value.trim();
+                studentSection = document.getElementById('student-section').value.trim();
+                
+                if (!studentName) {
+                    document.getElementById('name-error').style.display = 'block';
+                    return;
+                } else {
+                    document.getElementById('name-error').style.display = 'none';
+                }
+                
+                if (!studentSection) {
+                    document.getElementById('section-error').style.display = 'block';
+                    return;
+                } else {
+                    document.getElementById('section-error').style.display = 'none';
+                }
+                
+                // Select 10 random questions
+                quizData = selectRandomQuestions();
+                userAnswers = new Array(quizData.length).fill(null);
+                
+                // Record start time
+                testStartTime = new Date();
+                
+                document.getElementById('privacy-consent').style.display = 'none';
+                document.getElementById('quiz-container').style.display = 'block';
+                
+                loadQuestion();
+                startTimer();
+            });
+            
+            // Navigation buttons
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    loadQuestion();
+                }
+            });
+            
+            document.getElementById('next-btn').addEventListener('click', () => {
+                if (currentQuestion < quizData.length - 1) {
+                    currentQuestion++;
+                    loadQuestion();
+                }
+            });
+            
+            // Submit button
+            document.getElementById('submit-btn').addEventListener('click', () => {
+                const unanswered = userAnswers.filter(answer => answer === null).length;
+                if (unanswered > 0) {
+                    if (!confirm(`You have ${unanswered} unanswered questions. Are you sure you want to submit?`)) {
+                        return;
+                    }
+                }
+                submitQuiz();
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && currentQuestion < quizData.length - 1) {
+                    currentQuestion++;
+                    loadQuestion();
+                } else if (e.key === 'ArrowLeft' && currentQuestion > 0) {
+                    currentQuestion--;
+                    loadQuestion();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
